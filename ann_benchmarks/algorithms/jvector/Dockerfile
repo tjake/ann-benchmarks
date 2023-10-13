@@ -4,18 +4,18 @@ FROM ann-benchmarks
 ARG JVECTOR_VERSION
 WORKDIR /home/app
 
-# Install temurin JDK
+# Install JDK
 RUN apt-get update
-RUN apt-get install -y wget apt-transport-https gnupg
-RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
-RUN echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+RUN apt-get install -y wget apt-transport-https gnupg software-properties-common
+RUN wget -O- https://apt.corretto.aws/corretto.key | apt-key add -
+RUN add-apt-repository 'deb https://apt.corretto.aws stable main'
 RUN apt-get update
-RUN apt-get install -y temurin-20-jdk 
+RUN apt-get install -y java-21-amazon-corretto-jdk
+
 
 # Install JVector src
 RUN wget https://github.com/tjake/jvector/archive/refs/heads/${JVECTOR_VERSION}.tar.gz
 RUN tar -xzf ${JVECTOR_VERSION}.tar.gz
-ENV JAVA_HOME=/usr/lib/jvm/temurin-20-jdk-amd64
 WORKDIR /home/app/jvector-${JVECTOR_VERSION}
 RUN ./mvnw clean compile -DskipTests
 RUN ./mvnw compile exec:exec@annbench -Dexec.args="just compile this" || true
