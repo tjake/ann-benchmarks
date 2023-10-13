@@ -1,0 +1,25 @@
+float:
+  angular:
+  - base_args: ['@metric', '@dimension']
+    constructor: JVector
+    disabled: false
+    docker_tag: ann-benchmarks-jvector
+    module: ann_benchmarks.algorithms.jvector
+    name: jvector
+    run_groups:
+      m-16-ef-100:
+        arg_groups: [{efConstruction: 100, M: 16}]
+        args: {}
+        query_args: [[10, 20, 40, 80, 160]]
+  euclidean:
+  - base_args: ['@metric', '@dimension']
+    constructor: JVector
+    disabled: false
+    docker_tag: ann-benchmarks-jvector
+    module: ann_benchmarks.algorithms.jvector
+    name: jvector
+    run_groups:
+      m-16-ef-100:
+        arg_groups: [{efConstruction: 100, M: 16}]
+        args: {}
+        query_args: [[10, 20, 40, 80, 160]]
