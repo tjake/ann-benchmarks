@@ -1,4 +1,4 @@
-ARG JVECTOR_VERSION=annbench3
+ARG JVECTOR_VERSION=main
 FROM ann-benchmarks
 
 ARG JVECTOR_VERSION
@@ -26,7 +26,7 @@ WORKDIR /home/app
 
 # Custom entrypoint that also starts the Elasticsearch server.
 RUN echo 'set -eux' >> entrypoint.sh
-RUN echo 'sh -c "cd jvector-${JVECTOR_VERSION} && nohup ./mvnw compile exec:exec@annbench-1core > nohup.out 2>&1 &"' >> entrypoint.sh
+RUN echo 'sh -c "cd jvector-${JVECTOR_VERSION} && nohup ./mvnw compile exec:exec@ipcserve-1core > nohup.out 2>&1 &"' >> entrypoint.sh
 RUN echo 'python3 -u run_algorithm.py "$@" || cat jvector-${JVECTOR_VERSION}}/nohup.out' >> entrypoint.sh
 
 ENTRYPOINT ["/bin/bash", "/home/app/entrypoint.sh"]
