@@ -14,7 +14,7 @@ RUN apt-get install -y java-21-amazon-corretto-jdk
 
 
 # Install JVector src
-RUN wget https://github.com/tjake/jvector/archive/refs/heads/${JVECTOR_VERSION}.tar.gz
+RUN wget https://github.com/jbellis/jvector/archive/refs/heads/${JVECTOR_VERSION}.tar.gz
 RUN tar -xzf ${JVECTOR_VERSION}.tar.gz
 WORKDIR /home/app/jvector-${JVECTOR_VERSION}
 RUN ./mvnw clean compile -DskipTests
