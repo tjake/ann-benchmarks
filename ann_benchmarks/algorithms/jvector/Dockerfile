@@ -18,7 +18,7 @@ RUN wget https://github.com/jbellis/jvector/archive/refs/heads/${JVECTOR_VERSION
 RUN tar -xzf ${JVECTOR_VERSION}.tar.gz
 WORKDIR /home/app/jvector-${JVECTOR_VERSION}
 RUN ./mvnw clean compile -DskipTests
-RUN ./mvnw compile exec:exec@annbench -Dexec.args="just compile this" || true
+RUN ./mvnw compile exec:exec@ipcserve -Dexec.args="just compile this" || true
 
 
 ENV JVECTOR_VERSION=${JVECTOR_VERSION}
